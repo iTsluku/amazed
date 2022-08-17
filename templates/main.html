@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}Start new game!{% endblock %}
+{% block content %}
+
+{% if not grid_n %}
+<h1>Define game grid (NxM)</h1>
+<form action="/create_new_grid" method="post">
+    <label>N</label>
+    <input type="text" name="grid-n" id="grid-n" value="30" size="4">
+    <label>M</label>
+    <input type="text" name="grid-m" id="grid-m" value="50" size="4">
+    <input type="submit" value="Apply">
+</form>
+{% endif %}
+
+{% if ( grid_n and grid_m ) %}
+    {% set n = grid_n | int %}
+    {% set m = grid_m | int %}
+    <table>
+        {% for row in range(n) %}
+        <tr>
+            {% for column in range(m) %}
+            <th class="cell-default"></th>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+
+{% endblock %}
