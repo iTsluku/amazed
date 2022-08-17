@@ -34,3 +34,15 @@ th{
 th.cell-border{
     background-color: var(--primary-color-2);
 }
+
+th.cell-start{
+    background-color: var(--semantic-color-success);
+}
+
+th.cell-end{
+    background-color: var(--semantic-color-danger);
+}
+
+th.cell-player{
+    background-color: var(--semantic-color-info) !important;
+}

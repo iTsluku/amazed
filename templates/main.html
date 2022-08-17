@@ -3,7 +3,7 @@
 {% block content %}
 
 {% if not grid_n %}
-<h1>Define game grid (NxM)</h1>
+<h1>Define game grid (NxM) [>=2]</h1>
 <form action="/create_new_grid" method="post">
     <label>N</label>
     <input type="text" name="grid-n" id="grid-n" value="25" size="4">

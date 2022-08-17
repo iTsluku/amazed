@@ -8,7 +8,7 @@ grid_m = None
 
 def set_new_grid_size(n: int, m: int) -> None:
     global grid_n, grid_m
-    if n >= 0 and m >= 0:
+    if n >= 2 and m >= 2:
         grid_n = n
         grid_m = m
 
