@@ -1,31 +1,35 @@
 {% extends "layout.html" %}
 
-{% block title %}Start new game!{% endblock %}
 {% block content %}
 
 {% if not grid_n %}
 <h1>Define game grid (NxM)</h1>
 <form action="/create_new_grid" method="post">
     <label>N</label>
-    <input type="text" name="grid-n" id="grid-n" value="30" size="4">
+    <input type="text" name="grid-n" id="grid-n" value="25" size="4">
     <label>M</label>
-    <input type="text" name="grid-m" id="grid-m" value="50" size="4">
+    <input type="text" name="grid-m" id="grid-m" value="35" size="4">
     <input type="submit" value="Apply">
 </form>
 {% endif %}
 
 {% if ( grid_n and grid_m ) %}
+    <button name="gen-maze-btn" onclick="gen_maze()">Generate maze</button>
+    <button name="clear-cells-btn" onclick="clear_cells()">Clear</button>
     {% set n = grid_n | int %}
     {% set m = grid_m | int %}
     <table>
         {% for row in range(n) %}
         <tr>
             {% for column in range(m) %}
-            <th class="cell-default"></th>
+            <th class="cell cell-default" row={{row}} column="{{column}}"></th>
             {% endfor %}
         </tr>
         {% endfor %}
     </table>
 {% endif %}
 
+{% endblock %}
+{% block script %}
+    <script src="{{ url_for('static',filename='js/grid_func.js') }}" defer></script>
 {% endblock %}

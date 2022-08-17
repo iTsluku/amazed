@@ -30,3 +30,7 @@ th{
     border-color: var(--accent-color-1);
     padding:0;
 }
+
+th.cell-border{
+    background-color: var(--primary-color-2);
+}
