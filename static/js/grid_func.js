@@ -167,7 +167,7 @@ function gen_maze(){
     var random_boolean = true
     while(true){
         //TODO rm
-        if (k>30){
+        if (k>100){
             break
         }
         //check for empty space
@@ -211,7 +211,7 @@ function gen_vertical_wall(n,m){
             if (ql == null || ql.classList.contains("cell-border")){
                 left_cond = false
             }
-            if (i+1<n-1){
+            if (i+1<n){
                 let qd = document.querySelector("th.cell[row='"+(i+1).toString()+"'][column='"+(j-1).toString()+"']");
                 if (qd == null || qd.classList.contains("cell-border")){
                     down_neighbor_cond = false
@@ -223,7 +223,7 @@ function gen_vertical_wall(n,m){
             if (qr == null || qr.classList.contains("cell-border")){
                 right_cond = false
             }
-            if (i+1<n-1){
+            if (i+1<n){
                 let qd = document.querySelector("th.cell[row='"+(i+1).toString()+"'][column='"+(j+1).toString()+"']");
                 if (qd==null || qd.classList.contains("cell-border")){
                     down_neighbor_cond = false
