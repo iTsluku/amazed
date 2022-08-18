@@ -33,6 +33,9 @@ th{
 
 th.cell-border{
     background-color: var(--primary-color-2);
+    -webkit-transition: background-color 1000ms linear;
+    -ms-transition: background-color 1000ms linear;
+    transition: background-color 1000ms linear;
 }
 
 th.cell-start{
