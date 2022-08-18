@@ -15,7 +15,10 @@
 
 {% if ( grid_n and grid_m ) %}
     <button name="gen-maze-btn" onclick="gen_maze()">Generate maze</button>
-    <button name="clear-cells-btn" onclick="clear_cells()">Clear</button>
+    <button name="clear-cells-btn" onclick="clear_cells()">Clear all</button>
+    <button name="clear-cells-btn" onclick="clear_search_cells()">Clear search</button>
+    <button name="swarm-alg-btn" onclick="algorithm_swarm()">Swarm alg</button>
+    <button name="swarm-alg-btn" onclick="algorithm_greedy()">Greedy alg</button>
     {% set n = grid_n | int %}
     {% set m = grid_m | int %}
     <table>

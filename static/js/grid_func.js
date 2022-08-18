@@ -158,6 +158,152 @@ function clear_cells(){
     }
 }
 
+function clear_search_cells(){
+    const cells = document.querySelectorAll('th.cell')
+    for (let i = 0; i < cells.length; i++) {
+        c = cells[i]
+        if (c.classList.contains("cell-search")){
+            c.className = "cell cell-default";
+        }
+    }
+}
+
+async function algorithm_greedy(ms=null){
+    if(!player_exists()){
+        return false
+    }
+    if (ms==null){
+        ms = 1000 //TODO cfg
+    }
+
+    const [n, m] = get_grid_size()
+    //stack
+    var active_cells = []
+
+    const player = document.querySelector("th.cell-player")
+    x = parseInt(player.getAttribute('row'),10)
+    y = parseInt(player.getAttribute('column'),10)
+    active_cells.push([x,y])
+
+    while(active_cells.length>0){
+        await sleep(ms/100);
+        const [i, j] = active_cells.pop()//!!!
+       //right
+       if (j+1<m){
+           let q = document.querySelector("th.cell[row='"+(i).toString()+"'][column='"+(j+1).toString()+"']");
+           if (q!=null && q.classList.contains("cell-end")){
+               return true
+           }else if (q != null && q.classList.contains("cell-default")){
+               q.classList.remove('cell-default');
+               q.classList.add('cell-search');
+               active_cells.push([i,j+1])
+           }
+       }
+       //down
+       if (i+1<n){
+           let q = document.querySelector("th.cell[row='"+(i+1).toString()+"'][column='"+(j).toString()+"']");
+           if (q!=null && q.classList.contains("cell-end")){
+               return true
+           }else if (q != null && q.classList.contains("cell-default")){
+               q.classList.remove('cell-default');
+               q.classList.add('cell-search');
+               active_cells.push([i+1,j])
+           }
+       }
+       //left
+       if (j-1>=0){
+           let q = document.querySelector("th.cell[row='"+(i).toString()+"'][column='"+(j-1).toString()+"']");
+           if (q!=null && q.classList.contains("cell-end")){
+               return true
+           }else if (q != null && q.classList.contains("cell-default")){
+               q.classList.remove('cell-default');
+               q.classList.add('cell-search');
+               active_cells.push([i,j-1])
+           }
+       }
+       //up
+       if (i-1>=0){
+           let q = document.querySelector("th.cell[row='"+(i-1).toString()+"'][column='"+(j).toString()+"']");
+           if (q!=null && q.classList.contains("cell-end")){
+               return true
+           }else if (q != null && q.classList.contains("cell-default")){
+               q.classList.remove('cell-default');
+               q.classList.add('cell-search');
+               active_cells.push([i-1,j])
+           }
+       }
+    }
+    return false
+}
+
+async function algorithm_swarm(ms=null){
+    if(!player_exists()){
+        return false
+    }
+    if (ms==null){
+        ms = 1000 //TODO cfg
+    }
+
+    const [n, m] = get_grid_size()
+    //queue
+    var active_cells = []
+
+    const player = document.querySelector("th.cell-player")
+    x = parseInt(player.getAttribute('row'),10)
+    y = parseInt(player.getAttribute('column'),10)
+    active_cells.push([x,y])
+
+    while(active_cells.length>0){
+        await sleep(ms/100);
+        const [i, j] = active_cells.shift()//!!!
+        //right
+       if (j+1<m){
+           let q = document.querySelector("th.cell[row='"+(i).toString()+"'][column='"+(j+1).toString()+"']");
+           if (q!=null && q.classList.contains("cell-end")){
+               return true
+           }else if (q != null && q.classList.contains("cell-default")){
+               q.classList.remove('cell-default');
+               q.classList.add('cell-search');
+               active_cells.push([i,j+1])
+           }
+       }
+       //down
+       if (i+1<n){
+           let q = document.querySelector("th.cell[row='"+(i+1).toString()+"'][column='"+(j).toString()+"']");
+           if (q!=null && q.classList.contains("cell-end")){
+               return true
+           }else if (q != null && q.classList.contains("cell-default")){
+               q.classList.remove('cell-default');
+               q.classList.add('cell-search');
+               active_cells.push([i+1,j])
+           }
+       }
+       //left
+       if (j-1>=0){
+           let q = document.querySelector("th.cell[row='"+(i).toString()+"'][column='"+(j-1).toString()+"']");
+           if (q!=null && q.classList.contains("cell-end")){
+               return true
+           }else if (q != null && q.classList.contains("cell-default")){
+               q.classList.remove('cell-default');
+               q.classList.add('cell-search');
+               active_cells.push([i,j-1])
+           }
+       }
+       //up
+       if (i-1>=0){
+           let q = document.querySelector("th.cell[row='"+(i-1).toString()+"'][column='"+(j).toString()+"']");
+           if (q!=null && q.classList.contains("cell-end")){
+               return true
+           }else if (q != null && q.classList.contains("cell-default")){
+               q.classList.remove('cell-default');
+               q.classList.add('cell-search');
+               active_cells.push([i-1,j])
+           }
+       }
+    }
+    return false
+}
+
 async function gen_maze(){
     const ms = 1000 //TODO cfg
 

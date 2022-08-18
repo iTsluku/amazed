@@ -31,6 +31,10 @@ th{
     padding:0;
 }
 
+th.cell-default{
+    background-color: white;
+}
+
 th.cell-border{
     background-color: var(--primary-color-2);
     -webkit-transition: background-color 1000ms linear;
@@ -48,4 +52,8 @@ th.cell-end{
 
 th.cell-player{
     background-color: var(--semantic-color-info) !important;
+}
+
+th.cell-search{
+    background-color: var(--semantic-color-warning);
 }
